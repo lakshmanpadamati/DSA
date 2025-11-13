@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class CreatingStrings {
     public static void main(String[] args) throws Exception {
@@ -9,10 +8,11 @@ public class CreatingStrings {
         String s = br.readLine();
         int total = (int) Math.pow(s.length(), s.length());
 
-        Set<String> resultSet = new HashSet<>();
-        String next = s;
+        Set<String> resultSet = new LinkedHashSet<>();
+        char[] next =s.toCharArray();
+        Arrays.sort(next);
         for (int i = 0; i < total; i++) {
-            resultSet.add(next);
+            resultSet.add(new String(next));
             next = nextPermutation(next);
         }
         StringBuilder result = new StringBuilder();
@@ -23,8 +23,8 @@ public class CreatingStrings {
         System.out.println(result.toString().trim());
     }
 
-    static String nextPermutation(String s) {
-        char[] chArray = s.toCharArray();
+    static char[] nextPermutation(char[] chArray) {
+
         int i = chArray.length - 2;
         while (i >= 0 && chArray[i] >= chArray[i + 1]) {
             i--;
@@ -37,7 +37,7 @@ public class CreatingStrings {
             swap(chArray, i, j);
         }
         reverse(chArray, i + 1, chArray.length - 1);
-        return new String(chArray);
+        return chArray;
     }
 
     private static void swap(char[] arr, int i, int j) {
