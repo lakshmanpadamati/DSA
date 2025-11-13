@@ -6,15 +6,14 @@ public class CreatingStrings {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String s = br.readLine();
-        int total = (int) Math.pow(s.length(), s.length());
+
 
         Set<String> resultSet = new LinkedHashSet<>();
         char[] next =s.toCharArray();
         Arrays.sort(next);
-        for (int i = 0; i < total; i++) {
+        do{
             resultSet.add(new String(next));
-            next = nextPermutation(next);
-        }
+        }while( nextPermutation(next));
         StringBuilder result = new StringBuilder();
         for (String it : resultSet) {
             result.append(it).append("\n");
@@ -23,12 +22,13 @@ public class CreatingStrings {
         System.out.println(result.toString().trim());
     }
 
-    static char[] nextPermutation(char[] chArray) {
+    static boolean nextPermutation(char[] chArray) {
 
         int i = chArray.length - 2;
         while (i >= 0 && chArray[i] >= chArray[i + 1]) {
             i--;
         }
+        if(i<0)return false;
         if (i >= 0) {
             int j = chArray.length - 1;
             while (j >= i && chArray[i] >= chArray[j]) {
@@ -37,7 +37,7 @@ public class CreatingStrings {
             swap(chArray, i, j);
         }
         reverse(chArray, i + 1, chArray.length - 1);
-        return chArray;
+        return true;
     }
 
     private static void swap(char[] arr, int i, int j) {
