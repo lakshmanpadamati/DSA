@@ -7,7 +7,7 @@ public class CreatingStrings {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String s = br.readLine();
-        int total = (int) Math.pow(2, s.length());
+        int total = (int) Math.pow(s.length(), s.length());
 
         Set<String> resultSet = new HashSet<>();
         String next = s;
